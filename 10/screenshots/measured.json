@@ -1,0 +1,13 @@
+{
+  "browser": "chrome",
+  "viewport": "1920x1080",
+  "bodyBackground": "rgb(255, 255, 255)",
+  "bodyFont": "Circe, sans-serif",
+  "h1": null,
+  "headerHeight": 176,
+  "innerWidth": 1920,
+  "overflowX": false,
+  "scrollWidth": 1905,
+  "title": "Детский мир | Интернет-магазин детских товаров",
+  "url": "https://www.detmir.ru/"
+}

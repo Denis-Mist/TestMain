@@ -1,0 +1,167 @@
+{
+  "url": "https://www.detmir.ru/",
+  "results": [
+    {
+      "browser": "chrome",
+      "viewport": "1920x1080",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 176,
+      "innerWidth": 1920,
+      "overflowX": false,
+      "scrollWidth": 1905,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "chrome",
+      "viewport": "1366x768",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 176,
+      "innerWidth": 1366,
+      "overflowX": false,
+      "scrollWidth": 1351,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "chrome",
+      "viewport": "1024x768",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 176,
+      "innerWidth": 1024,
+      "overflowX": false,
+      "scrollWidth": 1009,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "chrome",
+      "viewport": "768x1024",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 768,
+      "overflowX": false,
+      "scrollWidth": 753,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "chrome",
+      "viewport": "375x812",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 375,
+      "overflowX": true,
+      "scrollWidth": 405,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "chrome",
+      "viewport": "360x640",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 360,
+      "overflowX": true,
+      "scrollWidth": 405,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "edge",
+      "viewport": "1920x1080",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 176,
+      "innerWidth": 1912,
+      "overflowX": false,
+      "scrollWidth": 1897,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "edge",
+      "viewport": "1366x768",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 176,
+      "innerWidth": 1358,
+      "overflowX": false,
+      "scrollWidth": 1343,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "edge",
+      "viewport": "1024x768",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 1016,
+      "overflowX": false,
+      "scrollWidth": 1001,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "edge",
+      "viewport": "768x1024",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 760,
+      "overflowX": false,
+      "scrollWidth": 745,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "edge",
+      "viewport": "375x812",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 367,
+      "overflowX": true,
+      "scrollWidth": 405,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    },
+    {
+      "browser": "edge",
+      "viewport": "360x640",
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyFont": "Circe, sans-serif",
+      "h1": null,
+      "headerHeight": 144,
+      "innerWidth": 352,
+      "overflowX": true,
+      "scrollWidth": 405,
+      "title": "Детский мир | Интернет-магазин детских товаров",
+      "url": "https://www.detmir.ru/"
+    }
+  ],
+  "errors": [
+    {
+      "browser": "firefox",
+      "error": "HTTPConnectionPool(host='localhost', port=58383): Read timed out. (read timeout=120)"
+    }
+  ]
+}
