@@ -1,0 +1,176 @@
+{
+  "id": "a1b2c3d4-pr13-4000-8000-000000000013",
+  "version": "2.0",
+  "name": "PR13 Variables and Conditions",
+  "url": "https://en.wikipedia.org",
+  "tests": [
+    {
+      "id": "t13-success",
+      "name": "Successful search",
+      "commands": [
+        {
+          "id": "c13-s1",
+          "comment": "",
+          "command": "open",
+          "target": "https://en.wikipedia.org/wiki/Main_Page",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-s2",
+          "comment": "",
+          "command": "store",
+          "target": "Unit testing",
+          "targets": [],
+          "value": "productName"
+        },
+        {
+          "id": "c13-s3",
+          "comment": "",
+          "command": "type",
+          "target": "id=searchInput",
+          "targets": [],
+          "value": "${productName}"
+        },
+        {
+          "id": "c13-s4",
+          "comment": "",
+          "command": "sendKeys",
+          "target": "id=searchInput",
+          "targets": [],
+          "value": "${KEY_ENTER}"
+        },
+        {
+          "id": "c13-s5",
+          "comment": "",
+          "command": "waitForElementPresent",
+          "target": "css=#firstHeading",
+          "targets": [],
+          "value": "10000"
+        },
+        {
+          "id": "c13-s6",
+          "comment": "",
+          "command": "storeText",
+          "target": "css=#firstHeading",
+          "targets": [],
+          "value": "headingText"
+        },
+        {
+          "id": "c13-s7",
+          "comment": "",
+          "command": "echo",
+          "target": "${headingText}",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-s8",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=#firstHeading",
+          "targets": [],
+          "value": "${productName}"
+        }
+      ]
+    },
+    {
+      "id": "t13-empty",
+      "name": "Search nonexistent page",
+      "commands": [
+        {
+          "id": "c13-f1",
+          "comment": "",
+          "command": "open",
+          "target": "https://en.wikipedia.org/wiki/Main_Page",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-f2",
+          "comment": "",
+          "command": "store",
+          "target": "XyzNonexistentArticle99999Qwerty",
+          "targets": [],
+          "value": "productName"
+        },
+        {
+          "id": "c13-f3",
+          "comment": "",
+          "command": "type",
+          "target": "id=searchInput",
+          "targets": [],
+          "value": "${productName}"
+        },
+        {
+          "id": "c13-f4",
+          "comment": "",
+          "command": "sendKeys",
+          "target": "id=searchInput",
+          "targets": [],
+          "value": "${KEY_ENTER}"
+        },
+        {
+          "id": "c13-f5",
+          "comment": "",
+          "command": "waitForElementPresent",
+          "target": "css=#content",
+          "targets": [],
+          "value": "10000"
+        },
+        {
+          "id": "c13-f6",
+          "comment": "if results — check first hit; else echo message",
+          "command": "if",
+          "target": "elementPresent=css=.mw-search-result-heading",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-f6b",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=.mw-search-result-heading",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-f6c",
+          "comment": "",
+          "command": "else",
+          "target": "",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-f7",
+          "comment": "",
+          "command": "echo",
+          "target": "No exact article for ${productName}",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c13-f8",
+          "comment": "",
+          "command": "end",
+          "target": "",
+          "targets": [],
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "s13-001",
+      "name": "Both flows",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": ["t13-success", "t13-empty"]
+    }
+  ],
+  "urls": ["https://en.wikipedia.org"],
+  "plugins": []
+}

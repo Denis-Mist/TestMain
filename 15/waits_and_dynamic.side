@@ -1,0 +1,41 @@
+{
+  "id": "a1b2c3d4-pr15-4000-8000-000000000015",
+  "version": "2.0",
+  "name": "PR15 Waits and Dynamic UI",
+  "url": "https://the-internet.herokuapp.com",
+  "tests": [
+    {
+      "id": "t15-scroll",
+      "name": "Infinite scroll load",
+      "commands": [
+        { "id": "c15-s1", "comment": "", "command": "open", "target": "https://the-internet.herokuapp.com/infinite_scroll", "targets": [], "value": "" },
+        { "id": "c15-s2", "comment": "", "command": "executeScript", "target": "window.scrollTo(0, document.body.scrollHeight)", "targets": [], "value": "" },
+        { "id": "c15-s3", "comment": "", "command": "waitForElementVisible", "target": "css=.jscroll-added", "targets": [], "value": "8000" },
+        { "id": "c15-s4", "comment": "", "command": "assertElementPresent", "target": "css=.jscroll-added", "targets": [], "value": "" }
+      ]
+    },
+    {
+      "id": "t15-tooltip",
+      "name": "Hover caption",
+      "commands": [
+        { "id": "c15-t1", "comment": "", "command": "open", "target": "https://the-internet.herokuapp.com/hovers", "targets": [], "value": "" },
+        { "id": "c15-t2", "comment": "", "command": "mouseOver", "target": "css=.figure", "targets": [], "value": "" },
+        { "id": "c15-t3", "comment": "", "command": "waitForElementVisible", "target": "css=.figcaption", "targets": [], "value": "5000" },
+        { "id": "c15-t4", "comment": "", "command": "waitForText", "target": "css=.figcaption h5", "targets": [], "value": "name: user1" },
+        { "id": "c15-t5", "comment": "", "command": "assertText", "target": "css=.figcaption h5", "targets": [], "value": "name: user1" }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "s15-001",
+      "name": "Dynamic content",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": ["t15-scroll", "t15-tooltip"]
+    }
+  ],
+  "urls": ["https://the-internet.herokuapp.com"],
+  "plugins": []
+}

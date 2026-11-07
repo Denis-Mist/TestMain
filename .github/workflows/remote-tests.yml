@@ -1,0 +1,194 @@
+name: Remote tests
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**/*отчет*"
+      - "**/ci-summary.md"
+      - "10/screenshots/**"
+      - "11/screenshots/**"
+      - "12/screenshots/**"
+      - "13/screenshots/**"
+      - "14/screenshots/**"
+      - "15/screenshots/**"
+      - "16/screenshots/**"
+
+permissions:
+  contents: write
+
+jobs:
+  qt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Qt 6
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build g++ qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins libgl1 libegl1
+      - name: Practice 6
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          cmake -S 6 -B 6/build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build 6/build
+          ( cd 6/build && ctest --output-on-failure ) | tee 6/screenshots/remote-ctest.log
+      - name: Practice 7
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          cmake -S 7 -B 7/build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build 7/build
+          ( cd 7/build && ctest --output-on-failure ) | tee 7/screenshots/remote-ctest.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qt
+          if-no-files-found: warn
+          path: |
+            6/screenshots/remote-ctest.log
+            7/screenshots/remote-ctest.log
+
+  jmeter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install JMeter
+        run: |
+          curl -fsSL -o /tmp/jmeter.tgz https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+          sudo tar -xzf /tmp/jmeter.tgz -C /opt
+      - name: Practice 8
+        run: |
+          cd 8
+          /opt/apache-jmeter-5.6.3/bin/jmeter -n -t httpbin_load_test.jmx -l results.jtl
+          python3 ../runner/summarize_jtl.py results.jtl ci-summary.md
+      - name: Practice 9
+        run: |
+          cd 9
+          /opt/apache-jmeter-5.6.3/bin/jmeter -n -t shop_load_test.jmx -l results.jtl
+          python3 ../runner/summarize_jtl.py results.jtl ci-summary.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jmeter
+          if-no-files-found: warn
+          path: |
+            8/ci-summary.md
+            9/ci-summary.md
+
+  selenium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Chrome
+        run: |
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+      - name: Install Python packages
+        run: pip install pytest selenium
+      - name: Practices 12-15
+        run: python runner/run_side.py 12/wikipedia_search.side 13/search_with_variables.side 14/saucedemo_flows.side 15/waits_and_dynamic.side
+      - name: Practice 16
+        run: python -m pytest 16/test_saucedemo_login.py -v | tee 16/screenshots/pytest-run.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selenium
+          if-no-files-found: warn
+          path: |
+            12/screenshots/**
+            13/screenshots/**
+            14/screenshots/**
+            15/screenshots/**
+            16/screenshots/pytest-run.log
+
+  layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install browsers
+        run: |
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+          curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft.gpg > /dev/null
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
+          sudo apt-get update
+          sudo apt-get install -y microsoft-edge-stable || true
+          sudo install -d -m 0755 /etc/apt/keyrings
+          wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+          echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee /etc/apt/sources.list.d/mozilla.list
+          printf 'Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1000\n' | sudo tee /etc/apt/preferences.d/mozilla
+          sudo apt-get update
+          sudo apt-get install -y firefox || true
+      - name: Layout and Lighthouse
+        run: |
+          pip install selenium
+          python runner/layout_check.py
+          npx --yes lighthouse https://www.detmir.ru/ --chrome-flags="--headless --no-sandbox --disable-gpu" --output=json --output-path=10/screenshots/lighthouse.json --only-categories=performance,accessibility,best-practices,seo --quiet || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: layout
+          if-no-files-found: warn
+          path: |
+            10/screenshots/**
+            11/screenshots/**
+
+  publish:
+    needs: [qt, jmeter, selenium, layout]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Place results
+        run: |
+          python3 - <<'PY'
+          import shutil
+          from pathlib import Path
+          src = Path("artifacts")
+          if not src.exists():
+              raise SystemExit(0)
+          for path in src.rglob("*"):
+              if not path.is_file():
+                  continue
+              parts = path.relative_to(src).parts
+              if len(parts) < 2:
+                  continue
+              dest = Path(*parts[1:])
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(path, dest)
+              print(dest)
+          PY
+          rm -rf artifacts
+      - name: Commit results
+        run: |
+          git config user.name "Denis"
+          git config user.email "152084232+Denis-Mist@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "Record remote test results [skip ci]"
+            git push
+          fi

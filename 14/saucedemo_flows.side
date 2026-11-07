@@ -1,0 +1,62 @@
+{
+  "id": "a1b2c3d4-pr14-4000-8000-000000000014",
+  "version": "2.0",
+  "name": "PR14 Registration and Cart",
+  "url": "https://www.saucedemo.com",
+  "tests": [
+    {
+      "id": "t14-login-ok",
+      "name": "Login success",
+      "commands": [
+        { "id": "c14-l1", "comment": "", "command": "open", "target": "https://www.saucedemo.com/", "targets": [], "value": "" },
+        { "id": "c14-l2", "comment": "", "command": "assertTitle", "target": "Swag Labs", "targets": [], "value": "" },
+        { "id": "c14-l3", "comment": "", "command": "type", "target": "id=user-name", "targets": [], "value": "standard_user" },
+        { "id": "c14-l4", "comment": "", "command": "type", "target": "id=password", "targets": [], "value": "secret_sauce" },
+        { "id": "c14-l5", "comment": "", "command": "click", "target": "id=login-button", "targets": [], "value": "" },
+        { "id": "c14-l6", "comment": "", "command": "waitForElementPresent", "target": "css=.inventory_list", "targets": [], "value": "10000" },
+        { "id": "c14-l7", "comment": "", "command": "assertElementPresent", "target": "css=.inventory_list", "targets": [], "value": "" },
+        { "id": "c14-l8", "comment": "", "command": "assertText", "target": "css=.title", "targets": [], "value": "Products" }
+      ]
+    },
+    {
+      "id": "t14-login-fail",
+      "name": "Login locked user",
+      "commands": [
+        { "id": "c14-f1", "comment": "", "command": "open", "target": "https://www.saucedemo.com/", "targets": [], "value": "" },
+        { "id": "c14-f2", "comment": "", "command": "type", "target": "id=user-name", "targets": [], "value": "locked_out_user" },
+        { "id": "c14-f3", "comment": "", "command": "type", "target": "id=password", "targets": [], "value": "secret_sauce" },
+        { "id": "c14-f4", "comment": "", "command": "click", "target": "id=login-button", "targets": [], "value": "" },
+        { "id": "c14-f5", "comment": "", "command": "waitForElementPresent", "target": "css=[data-test=\"error\"]", "targets": [], "value": "5000" },
+        { "id": "c14-f6", "comment": "", "command": "assertElementPresent", "target": "css=[data-test=\"error\"]", "targets": [], "value": "" }
+      ]
+    },
+    {
+      "id": "t14-cart",
+      "name": "Add product to cart",
+      "commands": [
+        { "id": "c14-c1", "comment": "", "command": "open", "target": "https://www.saucedemo.com/", "targets": [], "value": "" },
+        { "id": "c14-c2", "comment": "", "command": "type", "target": "id=user-name", "targets": [], "value": "standard_user" },
+        { "id": "c14-c3", "comment": "", "command": "type", "target": "id=password", "targets": [], "value": "secret_sauce" },
+        { "id": "c14-c4", "comment": "", "command": "click", "target": "id=login-button", "targets": [], "value": "" },
+        { "id": "c14-c5", "comment": "", "command": "waitForElementPresent", "target": "css=.inventory_list", "targets": [], "value": "10000" },
+        { "id": "c14-c6", "comment": "", "command": "click", "target": "id=add-to-cart-sauce-labs-backpack", "targets": [], "value": "" },
+        { "id": "c14-c7", "comment": "", "command": "click", "target": "css=.shopping_cart_link", "targets": [], "value": "" },
+        { "id": "c14-c8", "comment": "", "command": "waitForElementPresent", "target": "css=.cart_item", "targets": [], "value": "5000" },
+        { "id": "c14-c9", "comment": "", "command": "assertElementPresent", "target": "css=.cart_item", "targets": [], "value": "" },
+        { "id": "c14-c10", "comment": "", "command": "assertText", "target": "css=.inventory_item_name", "targets": [], "value": "Sauce Labs Backpack" }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "s14-001",
+      "name": "All scenarios",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": ["t14-login-ok", "t14-login-fail", "t14-cart"]
+    }
+  ],
+  "urls": ["https://www.saucedemo.com"],
+  "plugins": []
+}

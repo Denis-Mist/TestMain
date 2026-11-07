@@ -1,0 +1,13 @@
+{
+  "target": "https://httpbin.org/get",
+  "threads": 10,
+  "loops": 5,
+  "note": "Контрольный прогон из PowerShell (50 параллельных запросов) — до установки JMeter GUI",
+  "samples": 50,
+  "success": 50,
+  "errorPct": 0,
+  "avgMs": 4402,
+  "minMs": 1457,
+  "maxMs": 10508,
+  "throughputPerSec": 0.23
+}

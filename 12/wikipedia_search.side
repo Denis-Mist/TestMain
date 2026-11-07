@@ -1,0 +1,82 @@
+{
+  "id": "a1b2c3d4-pr12-4000-8000-000000000012",
+  "version": "2.0",
+  "name": "PR12 Wikipedia Search",
+  "url": "https://en.wikipedia.org",
+  "tests": [
+    {
+      "id": "t12-search-001",
+      "name": "Search Qt testing",
+      "commands": [
+        {
+          "id": "c12-001",
+          "comment": "",
+          "command": "open",
+          "target": "https://en.wikipedia.org/wiki/Main_Page",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c12-002",
+          "comment": "",
+          "command": "assertTitle",
+          "target": "*Wikipedia*",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c12-003",
+          "comment": "",
+          "command": "assertElementPresent",
+          "target": "css=.mw-logo",
+          "targets": [],
+          "value": ""
+        },
+        {
+          "id": "c12-004",
+          "comment": "",
+          "command": "type",
+          "target": "id=searchInput",
+          "targets": [],
+          "value": "Software testing"
+        },
+        {
+          "id": "c12-005",
+          "comment": "",
+          "command": "sendKeys",
+          "target": "id=searchInput",
+          "targets": [],
+          "value": "${KEY_ENTER}"
+        },
+        {
+          "id": "c12-006",
+          "comment": "",
+          "command": "waitForElementPresent",
+          "target": "css=#firstHeading",
+          "targets": [],
+          "value": "10000"
+        },
+        {
+          "id": "c12-007",
+          "comment": "",
+          "command": "assertText",
+          "target": "css=#firstHeading",
+          "targets": [],
+          "value": "Software testing"
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "s12-001",
+      "name": "Default Suite",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": ["t12-search-001"]
+    }
+  ],
+  "urls": ["https://en.wikipedia.org"],
+  "plugins": []
+}

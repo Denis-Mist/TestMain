@@ -1,0 +1,12 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.5, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Денис\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: C:\Users\Денис\OneDrive\Desktop\7_sem\Тестирование\16
+plugins: hypothesis-6.168.0
+collecting ... collected 2 items
+
+test_saucedemo_login.py::test_saucedemo_login[standard_user-secret_sauce-True] PASSED [ 50%]
+test_saucedemo_login.py::test_saucedemo_login[locked_out_user-secret_sauce-False] PASSED [100%]
+
+============================== 2 passed in 8.38s ==============================
