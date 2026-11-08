@@ -171,8 +171,12 @@ class Runner:
                 href = element.get_attribute("href")
                 if href and element.get_attribute("target") == "_blank":
                     self.driver.get(href)
-                else:
-                    element.click()
+                    return
+                tag = (element.tag_name or "").lower()
+                if tag in ("button", "input"):
+                    element.parent.execute_script("arguments[0].click()", element)
+                    return
+                element.click()
 
             self.with_element(target, _click)
             return
