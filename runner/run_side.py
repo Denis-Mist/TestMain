@@ -173,7 +173,7 @@ class Runner:
                     self.driver.get(href)
                     return
                 tag = (element.tag_name or "").lower()
-                if tag in ("button", "input"):
+                if tag in ("button", "input", "a"):
                     element.parent.execute_script("arguments[0].click()", element)
                     return
                 element.click()
