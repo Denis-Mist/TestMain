@@ -16,78 +16,34 @@ TEST Login success
 PASSED Login success
 screenshot 14/screenshots/Login-success.png
 TEST Login locked user
-FAILED Login locked user: Message: 
-Stacktrace:
-#0 0x639bb0e1f57a <unknown>
-#1 0x639bb07550b5 <unknown>
-#2 0x639bb079a75f <unknown>
-#3 0x639bb079a8f1 <unknown>
-#4 0x639bb07d86b4 <unknown>
-#5 0x639bb07d6d33 <unknown>
-#6 0x639bb07d6641 <unknown>
-#7 0x639bb07914d7 <unknown>
-#8 0x639bb07907ee <unknown>
-#9 0x639bb07912c1 <unknown>
-#10 0x639bb0de245c <unknown>
-#11 0x639bb0de0c8f <unknown>
-#12 0x639bb0dcbb05 <unknown>
-#13 0x639bb0de18ca <unknown>
-#14 0x639bb0db3939 <unknown>
-#15 0x639bb0e09fd8 <unknown>
-#16 0x639bb0e0a175 <unknown>
-#17 0x639bb0e1dee3 <unknown>
-#18 0x74c1420abe6b <unknown>
-#19 0x74c14213f55c <unknown>
-
-screenshot 14/screenshots/Login-locked-user-failed.png
+PASSED Login locked user
+screenshot 14/screenshots/Login-locked-user.png
 TEST Short password
-FAILED Short password: Message: 
-Stacktrace:
-#0 0x639bb0e1f57a <unknown>
-#1 0x639bb07550b5 <unknown>
-#2 0x639bb079a75f <unknown>
-#3 0x639bb079a8f1 <unknown>
-#4 0x639bb07d86b4 <unknown>
-#5 0x639bb07d6d33 <unknown>
-#6 0x639bb07d6641 <unknown>
-#7 0x639bb07914d7 <unknown>
-#8 0x639bb07907ee <unknown>
-#9 0x639bb07912c1 <unknown>
-#10 0x639bb0de245c <unknown>
-#11 0x639bb0de0c8f <unknown>
-#12 0x639bb0dcbb05 <unknown>
-#13 0x639bb0de18ca <unknown>
-#14 0x639bb0db3939 <unknown>
-#15 0x639bb0e09fd8 <unknown>
-#16 0x639bb0e0a175 <unknown>
-#17 0x639bb0e1dee3 <unknown>
-#18 0x74c1420abe6b <unknown>
-#19 0x74c14213f55c <unknown>
-
-screenshot 14/screenshots/Short-password-failed.png
+PASSED Short password
+screenshot 14/screenshots/Short-password.png
 TEST Add product to cart
 FAILED Add product to cart: Message: 
 Stacktrace:
-#0 0x639bb0e1f57a <unknown>
-#1 0x639bb07550b5 <unknown>
-#2 0x639bb079a75f <unknown>
-#3 0x639bb079a8f1 <unknown>
-#4 0x639bb07d86b4 <unknown>
-#5 0x639bb07d6d33 <unknown>
-#6 0x639bb07d6641 <unknown>
-#7 0x639bb07914d7 <unknown>
-#8 0x639bb07907ee <unknown>
-#9 0x639bb07912c1 <unknown>
-#10 0x639bb0de245c <unknown>
-#11 0x639bb0de0c8f <unknown>
-#12 0x639bb0dcbb05 <unknown>
-#13 0x639bb0de18ca <unknown>
-#14 0x639bb0db3939 <unknown>
-#15 0x639bb0e09fd8 <unknown>
-#16 0x639bb0e0a175 <unknown>
-#17 0x639bb0e1dee3 <unknown>
-#18 0x74c1420abe6b <unknown>
-#19 0x74c14213f55c <unknown>
+#0 0x61f0a6f6957a <unknown>
+#1 0x61f0a689f0b5 <unknown>
+#2 0x61f0a68e475f <unknown>
+#3 0x61f0a68e48f1 <unknown>
+#4 0x61f0a69226b4 <unknown>
+#5 0x61f0a6920d33 <unknown>
+#6 0x61f0a6920641 <unknown>
+#7 0x61f0a68db4d7 <unknown>
+#8 0x61f0a68da7ee <unknown>
+#9 0x61f0a68db2c1 <unknown>
+#10 0x61f0a6f2c45c <unknown>
+#11 0x61f0a6f2ac8f <unknown>
+#12 0x61f0a6f15b05 <unknown>
+#13 0x61f0a6f2b8ca <unknown>
+#14 0x61f0a6efd939 <unknown>
+#15 0x61f0a6f53fd8 <unknown>
+#16 0x61f0a6f54175 <unknown>
+#17 0x61f0a6f67ee3 <unknown>
+#18 0x757d744abe6b <unknown>
+#19 0x757d7453f55c <unknown>
 
 screenshot 14/screenshots/Add-product-to-cart-failed.png
 TEST Registration success
