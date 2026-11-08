@@ -44,7 +44,7 @@
           "id": "c13-s5",
           "comment": "",
           "command": "waitForElementPresent",
-          "target": "css=#firstHeading",
+          "target": "css=.mw-page-title-main",
           "targets": [],
           "value": "10000"
         },
@@ -52,7 +52,7 @@
           "id": "c13-s6",
           "comment": "",
           "command": "storeText",
-          "target": "css=#firstHeading",
+          "target": "css=.mw-page-title-main",
           "targets": [],
           "value": "headingText"
         },
@@ -68,7 +68,7 @@
           "id": "c13-s8",
           "comment": "",
           "command": "assertText",
-          "target": "css=#firstHeading",
+          "target": "css=.mw-page-title-main",
           "targets": [],
           "value": "${productName}"
         }

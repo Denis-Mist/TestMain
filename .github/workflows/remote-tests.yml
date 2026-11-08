@@ -98,9 +98,19 @@ jobs:
       - name: Install Python packages
         run: pip install pytest selenium
       - name: Practices 12-15
-        run: python runner/run_side.py 12/wikipedia_search.side 13/search_with_variables.side 14/saucedemo_flows.side 15/waits_and_dynamic.side
+        id: side
+        run: |
+          set -o pipefail
+          python runner/run_side.py 12/wikipedia_search.side 13/search_with_variables.side 14/saucedemo_flows.side 15/waits_and_dynamic.side | tee 12/screenshots/side-run.log
       - name: Practice 16
-        run: python -m pytest 16/test_saucedemo_login.py -v | tee 16/screenshots/pytest-run.log
+        id: pytest
+        if: always()
+        run: |
+          set -o pipefail
+          python -m pytest 16/test_saucedemo_login.py -v | tee 16/screenshots/pytest-run.log
+      - name: Report step results
+        if: always() && (steps.side.outcome != 'success' || steps.pytest.outcome != 'success')
+        run: exit 1
       - uses: actions/upload-artifact@v4
         if: always()
         with:

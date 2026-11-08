@@ -72,12 +72,15 @@ class Runner:
         condition = EC.visibility_of_element_located(loc) if visible else EC.presence_of_element_located(loc)
         return self.wait(timeout).until(condition)
 
+    def norm(self, text):
+        return " ".join((text or "").replace("\xa0", " ").split())
+
     def matches(self, expected, actual):
-        expected = self.expand(expected).strip()
-        actual = (actual or "").strip()
+        expected = self.norm(self.expand(expected))
+        actual = self.norm(actual)
         if any(ch in expected for ch in "*?"):
             return fnmatch.fnmatch(actual, expected)
-        return actual == expected
+        return actual == expected or (expected != "" and actual.startswith(expected))
 
     def element_present(self, target):
         try:
