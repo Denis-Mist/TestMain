@@ -1,7 +1,7 @@
 Test project /home/runner/work/TestMain/TestMain/7/build
     Start 1: calculator_gui_unit
-1/1 Test #1: calculator_gui_unit ..............   Passed    0.17 sec
+1/1 Test #1: calculator_gui_unit ..............   Passed    0.11 sec
 
 100% tests passed out of 1
 
-Total Test time (real) =   0.17 sec
+Total Test time (real) =   0.11 sec
