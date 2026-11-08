@@ -7,4 +7,4 @@ collecting ... collected 2 items
 16/test_saucedemo_login.py::test_saucedemo_login[standard_user-secret_sauce-True] PASSED [ 50%]
 16/test_saucedemo_login.py::test_saucedemo_login[locked_out_user-secret_sauce-False] PASSED [100%]
 
-============================== 2 passed in 1.85s ===============================
+============================== 2 passed in 1.58s ===============================
