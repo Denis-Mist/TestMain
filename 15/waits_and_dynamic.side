@@ -18,10 +18,11 @@
       "id": "t15-title",
       "name": "Wait for title",
       "commands": [
-        { "id": "c15-w1", "comment": "", "command": "open", "target": "https://the-internet.herokuapp.com/", "targets": [], "value": "" },
-        { "id": "c15-w2", "comment": "", "command": "click", "target": "linkText=A/B Testing", "targets": [], "value": "" },
-        { "id": "c15-w3", "comment": "", "command": "waitForTitle", "target": "*A/B Test*", "targets": [], "value": "10000" },
-        { "id": "c15-w4", "comment": "", "command": "assertTitle", "target": "*A/B Test*", "targets": [], "value": "" }
+        { "id": "c15-w1", "comment": "", "command": "open", "target": "https://the-internet.herokuapp.com/abtest", "targets": [], "value": "" },
+        { "id": "c15-w2", "comment": "", "command": "waitForText", "target": "css=h3", "targets": [], "value": "*A/B Test*" },
+        { "id": "c15-w3", "comment": "", "command": "click", "target": "linkText=Elemental Selenium", "targets": [], "value": "" },
+        { "id": "c15-w4", "comment": "", "command": "waitForTitle", "target": "*Elemental Selenium*", "targets": [], "value": "15000" },
+        { "id": "c15-w5", "comment": "", "command": "assertTitle", "target": "*Elemental Selenium*", "targets": [], "value": "" }
       ]
     },
     {

@@ -35,10 +35,10 @@
         {
           "id": "c13-s4",
           "comment": "",
-          "command": "sendKeys",
-          "target": "id=searchInput",
+          "command": "click",
+          "target": "css=button.cdx-search-input__end-button",
           "targets": [],
-          "value": "${KEY_ENTER}"
+          "value": ""
         },
         {
           "id": "c13-s5",
