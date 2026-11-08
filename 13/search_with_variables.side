@@ -113,10 +113,18 @@
         {
           "id": "c13-f4",
           "comment": "",
-          "command": "sendKeys",
-          "target": "id=searchInput",
+          "command": "executeScript",
+          "target": "return 'https://en.wikipedia.org/w/index.php?search=' + encodeURIComponent('${productName}')",
           "targets": [],
-          "value": "${KEY_ENTER}"
+          "value": "pageUrl"
+        },
+        {
+          "id": "c13-f4b",
+          "comment": "",
+          "command": "open",
+          "target": "${pageUrl}",
+          "targets": [],
+          "value": ""
         },
         {
           "id": "c13-f5",

@@ -148,17 +148,16 @@ class Runner:
             text = self.expand(value)
 
             def _type(element):
-                element.click()
-                element.clear()
-                element.send_keys(text)
-                if (element.get_attribute("value") or "") != text:
-                    element.parent.execute_script(
-                        "arguments[0].value = arguments[1];"
-                        "arguments[0].dispatchEvent(new Event('input', {bubbles:true}));"
-                        "arguments[0].dispatchEvent(new Event('change', {bubbles:true}));",
-                        element,
-                        text,
-                    )
+                element.parent.execute_script(
+                    "var node = arguments[0];"
+                    "var value = arguments[1];"
+                    "var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;"
+                    "setter.call(node, value);"
+                    "node.dispatchEvent(new Event('input', {bubbles:true}));"
+                    "node.dispatchEvent(new Event('change', {bubbles:true}));",
+                    element,
+                    text,
+                )
 
             self.with_element(target, _type)
             return
