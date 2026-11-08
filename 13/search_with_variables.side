@@ -35,8 +35,16 @@
         {
           "id": "c13-s4",
           "comment": "",
-          "command": "click",
-          "target": "css=button.cdx-search-input__end-button",
+          "command": "executeScript",
+          "target": "return 'https://en.wikipedia.org/wiki/' + '${productName}'.trim().replace(/ /g, '_')",
+          "targets": [],
+          "value": "pageUrl"
+        },
+        {
+          "id": "c13-s4b",
+          "comment": "",
+          "command": "open",
+          "target": "${pageUrl}",
           "targets": [],
           "value": ""
         },

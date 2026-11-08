@@ -148,8 +148,17 @@ class Runner:
             text = self.expand(value)
 
             def _type(element):
+                element.click()
                 element.clear()
                 element.send_keys(text)
+                if (element.get_attribute("value") or "") != text:
+                    element.parent.execute_script(
+                        "arguments[0].value = arguments[1];"
+                        "arguments[0].dispatchEvent(new Event('input', {bubbles:true}));"
+                        "arguments[0].dispatchEvent(new Event('change', {bubbles:true}));",
+                        element,
+                        text,
+                    )
 
             self.with_element(target, _type)
             return
@@ -159,7 +168,14 @@ class Runner:
             self.with_element(target, lambda element: element.send_keys(key))
             return
         if name == "click":
-            self.with_element(target, lambda element: element.click())
+            def _click(element):
+                href = element.get_attribute("href")
+                if href and element.get_attribute("target") == "_blank":
+                    self.driver.get(href)
+                else:
+                    element.click()
+
+            self.with_element(target, _click)
             return
         if name == "mouseOver":
             ActionChains(self.driver).move_to_element(self.find(target)).perform()
@@ -173,7 +189,7 @@ class Runner:
             self.variables[value] = self.expand(target)
             return
         if name == "storeText":
-            self.variables[value] = self.find(target).text
+            self.variables[value] = self.with_element(target, lambda element: element.text)
             return
         if name == "echo":
             print("echo", self.expand(target))
@@ -187,7 +203,7 @@ class Runner:
             self.find(target)
             return
         if name == "assertText":
-            actual = self.find(target).text
+            actual = self.with_element(target, lambda element: element.text)
             if not self.matches(value, actual):
                 raise AssertionError(f"text {actual!r} != {self.expand(value)!r}")
             return
@@ -221,6 +237,16 @@ class Runner:
             return
         raise AssertionError(f"unsupported command {name}")
 
+    def clear_site(self):
+        try:
+            self.driver.execute_script("window.localStorage.clear(); window.sessionStorage.clear();")
+        except Exception:
+            pass
+        try:
+            self.driver.delete_all_cookies()
+        except Exception:
+            pass
+
     def run_test(self, test):
         self.variables = {}
         self.skip_stack = []
@@ -232,9 +258,11 @@ class Runner:
         except (AssertionError, TimeoutException, Exception) as error:
             print(f"FAILED {test['name']}: {error}")
             self.shot(test["name"], failed=True)
+            self.clear_site()
             return False
         print(f"PASSED {test['name']}")
         self.shot(test["name"])
+        self.clear_site()
         return True
 
 
