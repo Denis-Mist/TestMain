@@ -1,84 +1,16 @@
 PROJECT PR12 Wikipedia Search
 TEST Search Qt testing
-FAILED Search Qt testing: Message: 
-Stacktrace:
-#0 0x636e7f17257a <unknown>
-#1 0x636e7eaa80b5 <unknown>
-#2 0x636e7eaed75f <unknown>
-#3 0x636e7eaed8f1 <unknown>
-#4 0x636e7eb2b6b4 <unknown>
-#5 0x636e7eb29d33 <unknown>
-#6 0x636e7eb29641 <unknown>
-#7 0x636e7eae44d7 <unknown>
-#8 0x636e7eae37ee <unknown>
-#9 0x636e7eae42c1 <unknown>
-#10 0x636e7f13545c <unknown>
-#11 0x636e7f133c8f <unknown>
-#12 0x636e7f11eb05 <unknown>
-#13 0x636e7f1348ca <unknown>
-#14 0x636e7f106939 <unknown>
-#15 0x636e7f15cfd8 <unknown>
-#16 0x636e7f15d175 <unknown>
-#17 0x636e7f170ee3 <unknown>
-#18 0x71ad5b8abe6b <unknown>
-#19 0x71ad5b93f55c <unknown>
-
-screenshot 12/screenshots/Search-Qt-testing-failed.png
+PASSED Search Qt testing
+screenshot 12/screenshots/Search-Qt-testing.png
 PROJECT PR13 Variables and Conditions
 TEST Successful search
-FAILED Successful search: Message: element not interactable
-  (Session info: chrome=157.0.8103.38); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
-Stacktrace:
-#0 0x636e7f17257a <unknown>
-#1 0x636e7eaa7f42 <unknown>
-#2 0x636e7eae985e <unknown>
-#3 0x636e7eae8cd0 <unknown>
-#4 0x636e7eae4e93 <unknown>
-#5 0x636e7eae4e39 <unknown>
-#6 0x636e7eb29d33 <unknown>
-#7 0x636e7eb29641 <unknown>
-#8 0x636e7eae44d7 <unknown>
-#9 0x636e7eae37ee <unknown>
-#10 0x636e7eae42c1 <unknown>
-#11 0x636e7f13545c <unknown>
-#12 0x636e7f133c8f <unknown>
-#13 0x636e7f11eb05 <unknown>
-#14 0x636e7f1348ca <unknown>
-#15 0x636e7f106939 <unknown>
-#16 0x636e7f15cfd8 <unknown>
-#17 0x636e7f15d175 <unknown>
-#18 0x636e7f170ee3 <unknown>
-#19 0x71ad5b8abe6b <unknown>
-#20 0x71ad5b93f55c <unknown>
-
-screenshot 13/screenshots/Successful-search-failed.png
+echo Unit testing
+PASSED Successful search
+screenshot 13/screenshots/Successful-search.png
 TEST Search nonexistent page
-FAILED Search nonexistent page: Message: element not interactable
-  (Session info: chrome=157.0.8103.38); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
-Stacktrace:
-#0 0x636e7f17257a <unknown>
-#1 0x636e7eaa7f42 <unknown>
-#2 0x636e7eae985e <unknown>
-#3 0x636e7eae8cd0 <unknown>
-#4 0x636e7eae4e93 <unknown>
-#5 0x636e7eae4e39 <unknown>
-#6 0x636e7eb29d33 <unknown>
-#7 0x636e7eb29641 <unknown>
-#8 0x636e7eae44d7 <unknown>
-#9 0x636e7eae37ee <unknown>
-#10 0x636e7eae42c1 <unknown>
-#11 0x636e7f13545c <unknown>
-#12 0x636e7f133c8f <unknown>
-#13 0x636e7f11eb05 <unknown>
-#14 0x636e7f1348ca <unknown>
-#15 0x636e7f106939 <unknown>
-#16 0x636e7f15cfd8 <unknown>
-#17 0x636e7f15d175 <unknown>
-#18 0x636e7f170ee3 <unknown>
-#19 0x71ad5b8abe6b <unknown>
-#20 0x71ad5b93f55c <unknown>
-
-screenshot 13/screenshots/Search-nonexistent-page-failed.png
+echo No exact article for XyzNonexistentArticle99999Qwerty
+PASSED Search nonexistent page
+screenshot 13/screenshots/Search-nonexistent-page.png
 PROJECT PR14 Registration and Cart
 TEST Login success
 PASSED Login success
@@ -86,76 +18,76 @@ screenshot 14/screenshots/Login-success.png
 TEST Login locked user
 FAILED Login locked user: Message: 
 Stacktrace:
-#0 0x636e7f17257a <unknown>
-#1 0x636e7eaa80b5 <unknown>
-#2 0x636e7eaed75f <unknown>
-#3 0x636e7eaed8f1 <unknown>
-#4 0x636e7eb2b6b4 <unknown>
-#5 0x636e7eb29d33 <unknown>
-#6 0x636e7eb29641 <unknown>
-#7 0x636e7eae44d7 <unknown>
-#8 0x636e7eae37ee <unknown>
-#9 0x636e7eae42c1 <unknown>
-#10 0x636e7f13545c <unknown>
-#11 0x636e7f133c8f <unknown>
-#12 0x636e7f11eb05 <unknown>
-#13 0x636e7f1348ca <unknown>
-#14 0x636e7f106939 <unknown>
-#15 0x636e7f15cfd8 <unknown>
-#16 0x636e7f15d175 <unknown>
-#17 0x636e7f170ee3 <unknown>
-#18 0x71ad5b8abe6b <unknown>
-#19 0x71ad5b93f55c <unknown>
+#0 0x639bb0e1f57a <unknown>
+#1 0x639bb07550b5 <unknown>
+#2 0x639bb079a75f <unknown>
+#3 0x639bb079a8f1 <unknown>
+#4 0x639bb07d86b4 <unknown>
+#5 0x639bb07d6d33 <unknown>
+#6 0x639bb07d6641 <unknown>
+#7 0x639bb07914d7 <unknown>
+#8 0x639bb07907ee <unknown>
+#9 0x639bb07912c1 <unknown>
+#10 0x639bb0de245c <unknown>
+#11 0x639bb0de0c8f <unknown>
+#12 0x639bb0dcbb05 <unknown>
+#13 0x639bb0de18ca <unknown>
+#14 0x639bb0db3939 <unknown>
+#15 0x639bb0e09fd8 <unknown>
+#16 0x639bb0e0a175 <unknown>
+#17 0x639bb0e1dee3 <unknown>
+#18 0x74c1420abe6b <unknown>
+#19 0x74c14213f55c <unknown>
 
 screenshot 14/screenshots/Login-locked-user-failed.png
 TEST Short password
 FAILED Short password: Message: 
 Stacktrace:
-#0 0x636e7f17257a <unknown>
-#1 0x636e7eaa80b5 <unknown>
-#2 0x636e7eaed75f <unknown>
-#3 0x636e7eaed8f1 <unknown>
-#4 0x636e7eb2b6b4 <unknown>
-#5 0x636e7eb29d33 <unknown>
-#6 0x636e7eb29641 <unknown>
-#7 0x636e7eae44d7 <unknown>
-#8 0x636e7eae37ee <unknown>
-#9 0x636e7eae42c1 <unknown>
-#10 0x636e7f13545c <unknown>
-#11 0x636e7f133c8f <unknown>
-#12 0x636e7f11eb05 <unknown>
-#13 0x636e7f1348ca <unknown>
-#14 0x636e7f106939 <unknown>
-#15 0x636e7f15cfd8 <unknown>
-#16 0x636e7f15d175 <unknown>
-#17 0x636e7f170ee3 <unknown>
-#18 0x71ad5b8abe6b <unknown>
-#19 0x71ad5b93f55c <unknown>
+#0 0x639bb0e1f57a <unknown>
+#1 0x639bb07550b5 <unknown>
+#2 0x639bb079a75f <unknown>
+#3 0x639bb079a8f1 <unknown>
+#4 0x639bb07d86b4 <unknown>
+#5 0x639bb07d6d33 <unknown>
+#6 0x639bb07d6641 <unknown>
+#7 0x639bb07914d7 <unknown>
+#8 0x639bb07907ee <unknown>
+#9 0x639bb07912c1 <unknown>
+#10 0x639bb0de245c <unknown>
+#11 0x639bb0de0c8f <unknown>
+#12 0x639bb0dcbb05 <unknown>
+#13 0x639bb0de18ca <unknown>
+#14 0x639bb0db3939 <unknown>
+#15 0x639bb0e09fd8 <unknown>
+#16 0x639bb0e0a175 <unknown>
+#17 0x639bb0e1dee3 <unknown>
+#18 0x74c1420abe6b <unknown>
+#19 0x74c14213f55c <unknown>
 
 screenshot 14/screenshots/Short-password-failed.png
 TEST Add product to cart
 FAILED Add product to cart: Message: 
 Stacktrace:
-#0 0x636e7f17257a <unknown>
-#1 0x636e7eaa80b5 <unknown>
-#2 0x636e7eaed75f <unknown>
-#3 0x636e7eaed8f1 <unknown>
-#4 0x636e7eb2b6b4 <unknown>
-#5 0x636e7eb29d33 <unknown>
-#6 0x636e7eb29641 <unknown>
-#7 0x636e7eae44d7 <unknown>
-#8 0x636e7eae37ee <unknown>
-#9 0x636e7eae42c1 <unknown>
-#10 0x636e7f13545c <unknown>
-#11 0x636e7f133c8f <unknown>
-#12 0x636e7f11eb05 <unknown>
-#13 0x636e7f1348ca <unknown>
-#14 0x636e7f106939 <unknown>
-#15 0x636e7f15cfd8 <unknown>
-#16 0x636e7f15d175 <unknown>
-#17 0x636e7f170ee3 <unknown>
-#18 0x71ad5b8abe6b <unknown>
-#19 0x71ad5b93f55c <unknown>
+#0 0x639bb0e1f57a <unknown>
+#1 0x639bb07550b5 <unknown>
+#2 0x639bb079a75f <unknown>
+#3 0x639bb079a8f1 <unknown>
+#4 0x639bb07d86b4 <unknown>
+#5 0x639bb07d6d33 <unknown>
+#6 0x639bb07d6641 <unknown>
+#7 0x639bb07914d7 <unknown>
+#8 0x639bb07907ee <unknown>
+#9 0x639bb07912c1 <unknown>
+#10 0x639bb0de245c <unknown>
+#11 0x639bb0de0c8f <unknown>
+#12 0x639bb0dcbb05 <unknown>
+#13 0x639bb0de18ca <unknown>
+#14 0x639bb0db3939 <unknown>
+#15 0x639bb0e09fd8 <unknown>
+#16 0x639bb0e0a175 <unknown>
+#17 0x639bb0e1dee3 <unknown>
+#18 0x74c1420abe6b <unknown>
+#19 0x74c14213f55c <unknown>
 
 screenshot 14/screenshots/Add-product-to-cart-failed.png
 TEST Registration success
