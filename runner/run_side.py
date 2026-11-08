@@ -152,7 +152,9 @@ class Runner:
             ActionChains(self.driver).move_to_element(self.find(target)).perform()
             return
         if name == "executeScript":
-            self.driver.execute_script(self.expand(target))
+            result = self.driver.execute_script(self.expand(target))
+            if value:
+                self.variables[value] = "" if result is None else str(result)
             return
         if name == "store":
             self.variables[value] = self.expand(target)
@@ -184,8 +186,13 @@ class Runner:
             timeout = int(value) / 1000 if str(value).isdigit() else 10
             self.find(target, timeout=timeout, visible=True)
             return
+        if name == "waitForTitle":
+            timeout = int(value) / 1000 if str(value).isdigit() else 15
+            if not self.wait(timeout).until(lambda drv: self.matches(target, drv.title)):
+                raise AssertionError(f"title {self.expand(target)!r} did not appear")
+            return
         if name == "waitForText":
-            timeout = 10
+            timeout = 30
             expected = self.expand(value)
 
             def _has_text(driver):

@@ -23,24 +23,29 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Install Qt 6
+      - name: Install Qt 6 and Chrome
         run: |
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build g++ qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins libgl1 libegl1
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb cmake ninja-build g++ qt6-base-dev qt6-base-dev-tools qt6-qpa-plugins libgl1 libegl1
       - name: Practice 6
         env:
           QT_QPA_PLATFORM: offscreen
         run: |
+          set -o pipefail
           cmake -S 6 -B 6/build -G Ninja -DCMAKE_BUILD_TYPE=Release
           cmake --build 6/build
-          ( cd 6/build && ctest --output-on-failure ) | tee 6/screenshots/remote-ctest.log
+          ( cd 6/build && ./temperature_sensor_tests ) | tee 6/screenshots/remote-ctest.log
+          python3 runner/render_shot.py log 6/screenshots/remote-ctest.log 6/screenshots/tests-passed.png "Практика 6 — QTest"
       - name: Practice 7
         env:
           QT_QPA_PLATFORM: offscreen
         run: |
+          set -o pipefail
           cmake -S 7 -B 7/build -G Ninja -DCMAKE_BUILD_TYPE=Release
           cmake --build 7/build
-          ( cd 7/build && ctest --output-on-failure ) | tee 7/screenshots/remote-ctest.log
+          ( cd 7/build && ./calculator_gui_tests ) | tee 7/screenshots/remote-ctest.log
+          python3 runner/render_shot.py log 7/screenshots/remote-ctest.log 7/screenshots/tests-passed.png "Практика 7 — GUI QTest"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -48,7 +53,9 @@ jobs:
           if-no-files-found: warn
           path: |
             6/screenshots/remote-ctest.log
+            6/screenshots/tests-passed.png
             7/screenshots/remote-ctest.log
+            7/screenshots/tests-passed.png
 
   jmeter:
     runs-on: ubuntu-latest
@@ -59,20 +66,29 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - name: Install JMeter
+      - name: Install JMeter and Chrome
         run: |
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
           curl -fsSL -o /tmp/jmeter.tgz https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
           sudo tar -xzf /tmp/jmeter.tgz -C /opt
       - name: Practice 8
         run: |
           cd 8
-          /opt/apache-jmeter-5.6.3/bin/jmeter -n -t httpbin_load_test.jmx -l results.jtl
+          rm -rf dashboard
+          /opt/apache-jmeter-5.6.3/bin/jmeter -n -t httpbin_load_test.jmx -l results.jtl -e -o dashboard
           python3 ../runner/summarize_jtl.py results.jtl ci-summary.md
+          python3 ../runner/render_shot.py plan httpbin_load_test.jmx screenshots/test-plan.png "Практика 8 — план JMeter"
+          python3 ../runner/render_shot.py html dashboard/index.html screenshots/summary-report.png 1400 2000
       - name: Practice 9
         run: |
           cd 9
-          /opt/apache-jmeter-5.6.3/bin/jmeter -n -t shop_load_test.jmx -l results.jtl
+          rm -rf dashboard
+          /opt/apache-jmeter-5.6.3/bin/jmeter -n -t shop_load_test.jmx -l results.jtl -e -o dashboard
           python3 ../runner/summarize_jtl.py results.jtl ci-summary.md
+          python3 ../runner/render_shot.py plan shop_load_test.jmx screenshots/test-plan.png "Практика 9 — план JMeter"
+          python3 ../runner/render_shot.py html dashboard/index.html screenshots/aggregate-report.png 1400 2000
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -80,11 +96,15 @@ jobs:
           if-no-files-found: warn
           path: |
             8/ci-summary.md
+            8/screenshots/test-plan.png
+            8/screenshots/summary-report.png
             9/ci-summary.md
+            9/screenshots/test-plan.png
+            9/screenshots/aggregate-report.png
 
   selenium:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -108,6 +128,11 @@ jobs:
         run: |
           set -o pipefail
           python -m pytest 16/test_saucedemo_login.py -v | tee 16/screenshots/pytest-run.log
+      - name: Render run screenshots
+        if: always()
+        run: |
+          python3 runner/render_shot.py log 12/screenshots/side-run.log 12/screenshots/side-run.png "Практики 12–15 — прогон сценариев" || true
+          python3 runner/render_shot.py log 16/screenshots/pytest-run.log 16/screenshots/pytest-green.png "Практика 16 — pytest" || true
       - name: Report step results
         if: always() && (steps.side.outcome != 'success' || steps.pytest.outcome != 'success')
         run: exit 1
@@ -122,10 +147,12 @@ jobs:
             14/screenshots/**
             15/screenshots/**
             16/screenshots/pytest-run.log
+            16/screenshots/pytest-green.png
+            12/screenshots/side-run.png
 
   layout:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -150,7 +177,10 @@ jobs:
         run: |
           pip install selenium
           python runner/layout_check.py
-          npx --yes lighthouse https://www.detmir.ru/ --chrome-flags="--headless --no-sandbox --disable-gpu" --output=json --output-path=10/screenshots/lighthouse.json --only-categories=performance,accessibility,best-practices,seo --quiet || true
+          npx --yes lighthouse https://www.detmir.ru/ --chrome-flags="--headless --no-sandbox --disable-gpu" --output json --output html --output-path=10/screenshots/lighthouse --only-categories=performance,accessibility,best-practices,seo --quiet || true
+          if [ -f 10/screenshots/lighthouse.report.json ]; then cp 10/screenshots/lighthouse.report.json 10/screenshots/lighthouse.json; fi
+          if [ -f 10/screenshots/lighthouse.report.html ]; then python3 runner/render_shot.py html 10/screenshots/lighthouse.report.html 10/screenshots/lighthouse-report.png 1200 1000 || true; fi
+          python3 runner/render_shot.py overlay 10/screenshots || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:

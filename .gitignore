@@ -5,6 +5,7 @@ build/
 **/__pycache__/
 **/*.pyc
 artifacts/
+**/dashboard/
 selenium.zip
 selenium-artifact/
 selenium-job.log.zip

@@ -47,6 +47,7 @@ def firefox():
     if not shutil.which("firefox"):
         return None
     options = FirefoxOptions()
+    options.page_load_strategy = "eager"
     options.add_argument("-headless")
     return webdriver.Firefox(options=options)
 
@@ -63,19 +64,36 @@ def edge():
     return webdriver.Edge(options=options)
 
 
-def capture(driver, browser):
+def capture(factory, browser):
     rows = []
     for width, height in SIZES:
-        driver.set_window_size(width, height)
-        driver.get(URL)
-        driver.implicitly_wait(3)
-        metrics = driver.execute_script(SCRIPT)
-        name = f"{width}x{height}-{browser}.png"
-        driver.save_screenshot(str(SHOTS11 / name))
-        if width == 1920 and browser == "chrome":
-            driver.save_screenshot(str(SHOTS10 / "desktop-chrome.png"))
-        rows.append({"browser": browser, "viewport": f"{width}x{height}", **metrics})
-        print(browser, width, height, "overflow", metrics.get("overflowX"), "title", metrics.get("title"))
+        driver = None
+        try:
+            driver = factory()
+            if driver is None:
+                return rows
+            driver.set_page_load_timeout(25)
+            driver.set_window_size(width, height)
+            try:
+                driver.get(URL)
+            except Exception as error:
+                print("load", browser, width, error)
+            try:
+                metrics = driver.execute_script(SCRIPT)
+            except Exception as error:
+                metrics = {"scriptError": str(error)}
+            name = f"{width}x{height}-{browser}.png"
+            driver.save_screenshot(str(SHOTS11 / name))
+            if width == 1920 and browser == "chrome":
+                driver.save_screenshot(str(SHOTS10 / "desktop-chrome.png"))
+            rows.append({"browser": browser, "viewport": f"{width}x{height}", **metrics})
+            print(browser, width, height, "overflow", metrics.get("overflowX"), "title", metrics.get("title"))
+        except Exception as error:
+            print("FAIL", browser, width, height, error)
+            rows.append({"browser": browser, "viewport": f"{width}x{height}", "error": str(error)})
+        finally:
+            if driver is not None:
+                driver.quit()
     return rows
 
 
@@ -84,20 +102,16 @@ def main():
     SHOTS11.mkdir(parents=True, exist_ok=True)
     results = []
     errors = []
-    for name, factory in (("chrome", chrome), ("firefox", firefox), ("edge", edge)):
-        driver = None
-        try:
-            driver = factory()
-            if driver is None:
-                errors.append({"browser": name, "error": "not installed"})
-                continue
-            results.extend(capture(driver, name))
-        except Exception as error:
-            errors.append({"browser": name, "error": str(error)})
-            print("FAIL", name, error)
-        finally:
-            if driver is not None:
-                driver.quit()
+    browsers = (
+        ("chrome", chrome, shutil.which("google-chrome") or shutil.which("google-chrome-stable")),
+        ("firefox", firefox, shutil.which("firefox")),
+        ("edge", edge, shutil.which("microsoft-edge") or shutil.which("microsoft-edge-stable")),
+    )
+    for name, factory, binary in browsers:
+        if not binary:
+            errors.append({"browser": name, "error": "not installed"})
+            continue
+        results.extend(capture(factory, name))
     payload = {"url": URL, "results": results, "errors": errors}
     (SHOTS11 / "layout.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     desktop = next((row for row in results if row["browser"] == "chrome" and row["viewport"] == "1920x1080"), None)

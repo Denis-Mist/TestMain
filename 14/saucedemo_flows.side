@@ -45,6 +45,79 @@
         { "id": "c14-c9", "comment": "", "command": "assertElementPresent", "target": "css=.cart_item", "targets": [], "value": "" },
         { "id": "c14-c10", "comment": "", "command": "assertText", "target": "css=.inventory_item_name", "targets": [], "value": "Sauce Labs Backpack" }
       ]
+    },
+    {
+      "id": "t14-short",
+      "name": "Short password",
+      "commands": [
+        { "id": "c14-p1", "comment": "", "command": "open", "target": "https://magento.softwaretestingboard.com/customer/account/create/", "targets": [], "value": "" },
+        { "id": "c14-p2", "comment": "", "command": "assertTitle", "target": "*Create New Customer Account*", "targets": [], "value": "" },
+        { "id": "c14-p3", "comment": "", "command": "type", "target": "id=firstname", "targets": [], "value": "Ivan" },
+        { "id": "c14-p4", "comment": "", "command": "type", "target": "id=lastname", "targets": [], "value": "Petrov" },
+        { "id": "c14-p5", "comment": "", "command": "type", "target": "id=email_address", "targets": [], "value": "short.password.pr14@example.com" },
+        { "id": "c14-p6", "comment": "", "command": "type", "target": "id=password", "targets": [], "value": "12345" },
+        { "id": "c14-p7", "comment": "", "command": "type", "target": "id=password-confirmation", "targets": [], "value": "12345" },
+        { "id": "c14-p8", "comment": "", "command": "click", "target": "css=button.action.submit.primary", "targets": [], "value": "" },
+        { "id": "c14-p9", "comment": "", "command": "waitForElementVisible", "target": "css=#password-error", "targets": [], "value": "10000" },
+        { "id": "c14-p10", "comment": "", "command": "assertElementPresent", "target": "css=#password-error", "targets": [], "value": "" }
+      ]
+    },
+    {
+      "id": "t14-exists",
+      "name": "Existing email",
+      "commands": [
+        { "id": "c14-e1", "comment": "", "command": "open", "target": "https://magento.softwaretestingboard.com/customer/account/create/", "targets": [], "value": "" },
+        { "id": "c14-e2", "comment": "", "command": "type", "target": "id=firstname", "targets": [], "value": "Roni" },
+        { "id": "c14-e3", "comment": "", "command": "type", "target": "id=lastname", "targets": [], "value": "Cost" },
+        { "id": "c14-e4", "comment": "", "command": "type", "target": "id=email_address", "targets": [], "value": "roni_cost@example.com" },
+        { "id": "c14-e5", "comment": "", "command": "type", "target": "id=password", "targets": [], "value": "Password123" },
+        { "id": "c14-e6", "comment": "", "command": "type", "target": "id=password-confirmation", "targets": [], "value": "Password123" },
+        { "id": "c14-e7", "comment": "", "command": "click", "target": "css=button.action.submit.primary", "targets": [], "value": "" },
+        { "id": "c14-e8", "comment": "", "command": "waitForElementVisible", "target": "css=.message-error", "targets": [], "value": "15000" },
+        { "id": "c14-e9", "comment": "", "command": "assertElementPresent", "target": "css=.message-error", "targets": [], "value": "" }
+      ]
+    },
+    {
+      "id": "t14-reg",
+      "name": "Registration success",
+      "commands": [
+        { "id": "c14-r1", "comment": "", "command": "executeScript", "target": "return 'pr14' + Date.now() + '@example.com'", "targets": [], "value": "email" },
+        { "id": "c14-r2", "comment": "", "command": "open", "target": "https://magento.softwaretestingboard.com/customer/account/create/", "targets": [], "value": "" },
+        { "id": "c14-r3", "comment": "", "command": "type", "target": "id=firstname", "targets": [], "value": "Ivan" },
+        { "id": "c14-r4", "comment": "", "command": "type", "target": "id=lastname", "targets": [], "value": "Petrov" },
+        { "id": "c14-r5", "comment": "", "command": "type", "target": "id=email_address", "targets": [], "value": "${email}" },
+        { "id": "c14-r6", "comment": "", "command": "type", "target": "id=password", "targets": [], "value": "Password123" },
+        { "id": "c14-r7", "comment": "", "command": "type", "target": "id=password-confirmation", "targets": [], "value": "Password123" },
+        { "id": "c14-r8", "comment": "", "command": "click", "target": "css=button.action.submit.primary", "targets": [], "value": "" },
+        { "id": "c14-r9", "comment": "", "command": "waitForText", "target": "css=.message-success", "targets": [], "value": "*Thank you for registering*" },
+        { "id": "c14-r10", "comment": "", "command": "assertText", "target": "css=.message-success", "targets": [], "value": "*Thank you for registering*" },
+        { "id": "c14-r11", "comment": "", "command": "assertTitle", "target": "*My Account*", "targets": [], "value": "" }
+      ]
+    },
+    {
+      "id": "t14-size",
+      "name": "Add without size",
+      "commands": [
+        { "id": "c14-s1", "comment": "", "command": "open", "target": "https://magento.softwaretestingboard.com/radiant-tee.html", "targets": [], "value": "" },
+        { "id": "c14-s2", "comment": "", "command": "assertTitle", "target": "*Radiant Tee*", "targets": [], "value": "" },
+        { "id": "c14-s3", "comment": "", "command": "click", "target": "id=product-addtocart-button", "targets": [], "value": "" },
+        { "id": "c14-s4", "comment": "", "command": "waitForElementVisible", "target": "css=.mage-error", "targets": [], "value": "10000" },
+        { "id": "c14-s5", "comment": "", "command": "assertElementPresent", "target": "css=.mage-error", "targets": [], "value": "" }
+      ]
+    },
+    {
+      "id": "t14-sized",
+      "name": "Add with size",
+      "commands": [
+        { "id": "c14-z1", "comment": "", "command": "open", "target": "https://magento.softwaretestingboard.com/radiant-tee.html", "targets": [], "value": "" },
+        { "id": "c14-z2", "comment": "", "command": "click", "target": "css=.swatch-attribute.size .swatch-option", "targets": [], "value": "" },
+        { "id": "c14-z3", "comment": "", "command": "click", "target": "css=.swatch-attribute.color .swatch-option", "targets": [], "value": "" },
+        { "id": "c14-z4", "comment": "", "command": "click", "target": "id=product-addtocart-button", "targets": [], "value": "" },
+        { "id": "c14-z5", "comment": "", "command": "waitForElementVisible", "target": "css=.message-success", "targets": [], "value": "15000" },
+        { "id": "c14-z6", "comment": "", "command": "open", "target": "https://magento.softwaretestingboard.com/checkout/cart/", "targets": [], "value": "" },
+        { "id": "c14-z7", "comment": "", "command": "waitForElementVisible", "target": "css=.product-item-name", "targets": [], "value": "15000" },
+        { "id": "c14-z8", "comment": "", "command": "assertText", "target": "css=.product-item-name", "targets": [], "value": "*Radiant Tee*" }
+      ]
     }
   ],
   "suites": [
@@ -54,7 +127,7 @@
       "persistSession": false,
       "parallel": false,
       "timeout": 300,
-      "tests": ["t14-login-ok", "t14-login-fail", "t14-cart"]
+      "tests": ["t14-login-ok", "t14-login-fail", "t14-cart", "t14-short", "t14-exists", "t14-reg", "t14-size", "t14-sized"]
     }
   ],
   "urls": ["https://www.saucedemo.com"],

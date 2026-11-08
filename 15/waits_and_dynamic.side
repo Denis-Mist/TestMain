@@ -15,6 +15,16 @@
       ]
     },
     {
+      "id": "t15-title",
+      "name": "Wait for title",
+      "commands": [
+        { "id": "c15-w1", "comment": "", "command": "open", "target": "https://the-internet.herokuapp.com/", "targets": [], "value": "" },
+        { "id": "c15-w2", "comment": "", "command": "click", "target": "linkText=A/B Testing", "targets": [], "value": "" },
+        { "id": "c15-w3", "comment": "", "command": "waitForTitle", "target": "*A/B Test*", "targets": [], "value": "10000" },
+        { "id": "c15-w4", "comment": "", "command": "assertTitle", "target": "*A/B Test*", "targets": [], "value": "" }
+      ]
+    },
+    {
       "id": "t15-tooltip",
       "name": "Hover caption",
       "commands": [
@@ -33,7 +43,7 @@
       "persistSession": false,
       "parallel": false,
       "timeout": 300,
-      "tests": ["t15-scroll", "t15-tooltip"]
+      "tests": ["t15-scroll", "t15-title", "t15-tooltip"]
     }
   ],
   "urls": ["https://the-internet.herokuapp.com"],
