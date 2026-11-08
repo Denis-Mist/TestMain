@@ -1,7 +1,12 @@
-Test project /home/runner/work/TestMain/TestMain/7/build
-    Start 1: calculator_gui_unit
-1/1 Test #1: calculator_gui_unit ..............   Passed    0.11 sec
-
-100% tests passed out of 1
-
-Total Test time (real) =   0.11 sec
+********* Start testing of TestCalculatorGUI *********
+Config: Using QtTest library 6.10.2, Qt 6.10.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 15.2.0), ubuntu 26.04
+PASS   : TestCalculatorGUI::initTestCase()
+QWARN  : TestCalculatorGUI::testAdditionWithGUI() This plugin does not support propagateSizeHints()
+PASS   : TestCalculatorGUI::testAdditionWithGUI()
+QWARN  : TestCalculatorGUI::testSubtractionWithGUI() This plugin does not support propagateSizeHints()
+PASS   : TestCalculatorGUI::testSubtractionWithGUI()
+QWARN  : TestCalculatorGUI::testInvalidInputShowsError() This plugin does not support propagateSizeHints()
+PASS   : TestCalculatorGUI::testInvalidInputShowsError()
+PASS   : TestCalculatorGUI::cleanupTestCase()
+Totals: 5 passed, 0 failed, 0 skipped, 0 blacklisted, 9ms
+********* Finished testing of TestCalculatorGUI *********

@@ -1,7 +1,9 @@
-Test project /home/runner/work/TestMain/TestMain/6/build
-    Start 1: temperature_sensor_unit
-1/1 Test #1: temperature_sensor_unit ..........   Passed    0.01 sec
-
-100% tests passed out of 1
-
-Total Test time (real) =   0.07 sec
+********* Start testing of TestTemperatureSensor *********
+Config: Using QtTest library 6.10.2, Qt 6.10.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 15.2.0), ubuntu 26.04
+PASS   : TestTemperatureSensor::initTestCase()
+PASS   : TestTemperatureSensor::testSignalEmittedOnChange()
+PASS   : TestTemperatureSensor::testSignalCarriesCorrectValue()
+PASS   : TestTemperatureSensor::testSignalNotEmittedOnSameValue()
+PASS   : TestTemperatureSensor::cleanupTestCase()
+Totals: 5 passed, 0 failed, 0 skipped, 0 blacklisted, 0ms
+********* Finished testing of TestTemperatureSensor *********
