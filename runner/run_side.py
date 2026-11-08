@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -72,6 +72,15 @@ class Runner:
         condition = EC.visibility_of_element_located(loc) if visible else EC.presence_of_element_located(loc)
         return self.wait(timeout).until(condition)
 
+    def with_element(self, target, action, timeout=10):
+        last_error = None
+        for _ in range(4):
+            try:
+                return action(self.find(target, timeout=timeout))
+            except StaleElementReferenceException as error:
+                last_error = error
+        raise last_error
+
     def norm(self, text):
         return " ".join((text or "").replace("\xa0", " ").split())
 
@@ -136,17 +145,21 @@ class Runner:
             self.driver.get(self.expand(target))
             return
         if name == "type":
-            element = self.find(target)
-            element.clear()
-            element.send_keys(self.expand(value))
+            text = self.expand(value)
+
+            def _type(element):
+                element.clear()
+                element.send_keys(text)
+
+            self.with_element(target, _type)
             return
         if name == "sendKeys":
-            element = self.find(target)
             token = value.strip()
-            element.send_keys(KEY_MAP.get(token, self.expand(value)))
+            key = KEY_MAP.get(token, self.expand(value))
+            self.with_element(target, lambda element: element.send_keys(key))
             return
         if name == "click":
-            self.find(target).click()
+            self.with_element(target, lambda element: element.click())
             return
         if name == "mouseOver":
             ActionChains(self.driver).move_to_element(self.find(target)).perform()
